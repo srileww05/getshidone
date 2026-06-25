@@ -1,0 +1,388 @@
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Inter:wght@400;500;600&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  min-height: 100vh;
+  background-color: #f5f5f0;
+  background-image: radial-gradient(circle, #b0b0a0 1px, transparent 1px);
+  background-size: 24px 24px;
+  color: #1a1a1a;
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-size: 1.2rem;
+  color: #888;
+}
+
+/* HEADER */
+.app-header {
+  padding: 28px 32px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header-left h1 {
+  font-family: 'Caveat', cursive;
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  letter-spacing: -0.5px;
+}
+
+.tagline {
+  font-size: 0.82rem;
+  color: #999;
+  margin-top: 2px;
+  font-style: italic;
+}
+
+/* BOARD */
+.board {
+  padding: 8px 32px 32px;
+  overflow-x: auto;
+}
+
+.columns {
+  display: flex;
+  gap: 20px;
+  min-width: max-content;
+  align-items: flex-start;
+}
+
+/* COLUMN */
+.column {
+  width: 260px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.column-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 4px 8px;
+  border-bottom: 2px solid #1a1a1a;
+  margin-bottom: 4px;
+}
+
+.card-count {
+  font-family: 'Caveat', cursive;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  min-width: 20px;
+}
+
+.column-title {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #1a1a1a;
+  flex: 1;
+}
+
+.column-arrow {
+  font-size: 1rem;
+  color: #1a1a1a;
+  opacity: 0.4;
+}
+
+.today-warning {
+  font-size: 0.75rem;
+  color: #b45309;
+  background: #fef3c7;
+  border: 1px solid #fde68a;
+  border-radius: 6px;
+  padding: 6px 10px;
+  font-style: italic;
+}
+
+.cards-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-height: 40px;
+}
+
+/* STICKY NOTE CARDS — color per column */
+.card {
+  border-radius: 2px;
+  padding: 14px 12px 12px;
+  position: relative;
+  box-shadow: 3px 3px 8px rgba(0,0,0,0.13), 1px 1px 0px rgba(0,0,0,0.08);
+  transition: box-shadow 0.2s, transform 0.15s;
+  transform: rotate(-0.4deg);
+}
+
+.card:nth-child(even) {
+  transform: rotate(0.5deg);
+}
+
+.card:hover {
+  box-shadow: 5px 5px 14px rgba(0,0,0,0.18);
+  transform: rotate(0deg) translateY(-2px);
+  z-index: 2;
+}
+
+/* Column-specific sticky colors */
+.column:nth-child(1) .card { background: #fef08a; } /* Brain Dump — yellow */
+.column:nth-child(2) .card { background: #86efac; } /* Today — green */
+.column:nth-child(3) .card { background: #93c5fd; } /* In Progress — blue */
+.column:nth-child(4) .card { background: #d8b4fe; } /* Done — purple */
+
+.card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 8px;
+}
+
+.effort-dot {
+  font-size: 0.68rem;
+  color: rgba(0,0,0,0.45);
+  font-style: italic;
+}
+
+.card-actions {
+  display: flex;
+  gap: 2px;
+}
+
+.focus-btn, .menu-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 0.85rem;
+  padding: 2px 4px;
+  border-radius: 4px;
+  opacity: 0.4;
+  transition: opacity 0.15s;
+}
+
+.focus-btn:hover, .menu-btn:hover {
+  opacity: 1;
+}
+
+.card-title {
+  font-family: 'Caveat', cursive;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  line-height: 1.4;
+}
+
+.card-menu {
+  margin-top: 10px;
+  background: rgba(255,255,255,0.85);
+  border: 1px solid rgba(0,0,0,0.1);
+  border-radius: 8px;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  backdrop-filter: blur(4px);
+}
+
+.menu-label {
+  font-size: 0.68rem;
+  color: #999;
+  margin-bottom: 2px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.card-menu button {
+  background: none;
+  border: none;
+  color: #333;
+  text-align: left;
+  padding: 6px 8px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.82rem;
+  transition: background 0.15s;
+}
+
+.card-menu button:hover {
+  background: rgba(0,0,0,0.06);
+}
+
+.card-menu hr {
+  border: none;
+  border-top: 1px solid rgba(0,0,0,0.08);
+  margin: 4px 0;
+}
+
+.delete-btn {
+  color: #dc2626 !important;
+}
+
+/* ADD CARD */
+.add-card-btn {
+  width: 100%;
+  background: rgba(255,255,255,0.45);
+  border: 1.5px dashed rgba(0,0,0,0.2);
+  color: #999;
+  padding: 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.82rem;
+  font-family: 'Caveat', cursive;
+  font-size: 1rem;
+  transition: all 0.2s;
+}
+
+.add-card-btn:hover {
+  background: rgba(255,255,255,0.7);
+  border-color: rgba(0,0,0,0.4);
+  color: #333;
+}
+
+.add-card-input input {
+  width: 100%;
+  background: #fff;
+  border: 1.5px solid #1a1a1a;
+  border-radius: 4px;
+  padding: 8px 10px;
+  color: #1a1a1a;
+  font-size: 0.9rem;
+  font-family: 'Caveat', cursive;
+  font-size: 1rem;
+  outline: none;
+  box-shadow: 2px 2px 0 #1a1a1a;
+}
+
+.input-actions {
+  display: flex;
+  gap: 6px;
+  margin-top: 6px;
+}
+
+.input-actions button {
+  flex: 1;
+  padding: 7px;
+  border-radius: 4px;
+  border: 1.5px solid #1a1a1a;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition: all 0.15s;
+}
+
+.input-actions button:first-child {
+  background: #1a1a1a;
+  color: #fff;
+}
+
+.input-actions button:last-child {
+  background: transparent;
+  color: #1a1a1a;
+}
+
+/* FOCUS MODE */
+.focus-mode {
+  min-height: 100vh;
+  background-color: #f5f5f0;
+  background-image: radial-gradient(circle, #b0b0a0 1px, transparent 1px);
+  background-size: 24px 24px;
+  display: flex;
+  flex-direction: column;
+  padding: 24px 32px;
+}
+
+.exit-focus {
+  background: none;
+  border: none;
+  color: #999;
+  cursor: pointer;
+  font-size: 0.9rem;
+  text-align: left;
+  padding: 0;
+  margin-bottom: 48px;
+  font-family: 'Inter', sans-serif;
+  transition: color 0.2s;
+}
+
+.exit-focus:hover {
+  color: #333;
+}
+
+.focus-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  text-align: center;
+  gap: 36px;
+}
+
+.focus-label {
+  font-size: 0.7rem;
+  letter-spacing: 3px;
+  color: #999;
+  text-transform: uppercase;
+}
+
+.focus-task {
+  font-family: 'Caveat', cursive;
+  font-size: 2.8rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  max-width: 560px;
+  line-height: 1.2;
+  background: #fef08a;
+  padding: 24px 32px;
+  border-radius: 2px;
+  box-shadow: 4px 4px 12px rgba(0,0,0,0.12);
+  transform: rotate(-0.5deg);
+}
+
+.timer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.timer-display {
+  font-family: 'Caveat', cursive;
+  font-size: 5rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  letter-spacing: 4px;
+  font-variant-numeric: tabular-nums;
+}
+
+.timer-controls {
+  display: flex;
+  gap: 10px;
+}
+
+.timer-controls button {
+  background: #fff;
+  border: 1.5px solid #1a1a1a;
+  color: #1a1a1a;
+  padding: 10px 24px;
+  border-radius: 4px;
+  cursor: pointer;
+}
